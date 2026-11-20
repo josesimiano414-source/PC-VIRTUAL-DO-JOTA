@@ -1,0 +1,68 @@
+
+name: PC Virtual - High Performance
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pc-virtual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+
+    steps:
+      - name: Preparar ambiente
+        uses: actions/checkout@v4
+
+      - name: Atualizar sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+
+      - name: Instalar ferramentas
+        run: |
+          sudo apt-get install -y \
+            git curl wget unzip zip \
+            build-essential \
+            python3 python3-pip \
+            nodejs npm \
+            htop neofetch \
+            ffmpeg \
+            mesa-utils \
+            xvfb
+
+      - name: Informações do PC virtual
+        run: |
+          echo "===== PROCESSADOR ====="
+          lscpu
+
+          echo "===== MEMÓRIA RAM ====="
+          free -h
+
+          echo "===== ARMAZENAMENTO ====="
+          df -h
+
+          echo "===== SISTEMA ====="
+          uname -a
+
+      - name: Teste de desempenho
+        run: |
+          echo "PC Virtual iniciado!"
+          echo "CPU:"
+          nproc
+
+          echo "Memória:"
+          free -h
+
+          echo "Armazenamento:"
+          df -h
+
+      - name: Ambiente pronto
+        run: |
+          echo "================================"
+          echo " PC VIRTUAL CONFIGURADO"
+          echo "================================"
+          echo "Linux Ubuntu"
+          echo "Python instalado"
+          echo "Node.js instalado"
+          echo "FFmpeg instalado"
+          echo "Ferramentas de compilação prontas"
